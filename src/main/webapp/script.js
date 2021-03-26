@@ -1,14 +1,3 @@
-function generateLocations(){
-     const locations =
-        ['Cibecue Falls', 'The Waves', 'Rare Earth Gallery in Cave Creek', 'Dixie Mine Trail in Fountain Hills'];
-
-    // Pick a random location.
-    const locations = locations[Math.floor(Math.random() * locations.length)];
-
-    // Add it to the page.
-    const locationsContainer = document.getElementById('locations-container');
-    locationsContainer.innerText = locations;   
-}
 
 /** Fetches tasks from the server and adds them to the DOM. */
 function loadLocations() {
