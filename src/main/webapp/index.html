@@ -2,9 +2,16 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Hello World</title>
+    <title>Hidden Gems</title>
     <script src="script.js"></script>
   </head>
-  <body>
+  <body onload="loadLocations()">
+    <h1>List of Hidden Gems:</h1>
+    (Add form here)
+
+    <ul id="location-list"></ul>
+
+      <button onclick="generateLocations()"> Click here! </button>
+      <div id="locations-container">Locations</div>
   </body>
 </html>
