@@ -15,3 +15,33 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+/** Servlet responsible for listing locations. */
+@WebServlet("/list-locations")
+public class ListTasksServlet extends HttpServlet {
+
+  @Override
+  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
+    Query<Entity> query =
+        Query.newEntityQueryBuilder().setKind("Location").setOrderBy(OrderBy.desc("timestamp")).build();
+    QueryResults<Entity> results = datastore.run(query);
+
+    List<Task> tasks = new ArrayList<>();
+    while (results.hasNext()) {
+      Entity entity = results.next();
+
+      long id = entity.getKey().getId();
+      String name = entity.getString("Location");
+      long timestamp = entity.getLong("timestamp");
+
+      Location location = new Location(id, name, timestamp);
+      locations.add(location);
+    }
+
+    Gson gson = new Gson();
+
+    response.setContentType("application/json;");
+    response.getWriter().println(gson.toJson(locations));
+  }
+}
