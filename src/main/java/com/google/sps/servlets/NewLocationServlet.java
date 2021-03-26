@@ -13,24 +13,24 @@ import javax.servlet.http.HttpServletResponse;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
 
-/** Servlet responsible for creating new tasks. */
+/** Servlet responsible for creating new locations. */
 @WebServlet("/new-location")
-public class NewTaskServlet extends HttpServlet {
+public class NewLocationServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     // Sanitize user input to remove HTML tags and JavaScript.
-    String title = Jsoup.clean(request.getParameter("title"), Whitelist.none());
+    String name = Jsoup.clean(request.getParameter("name"), Whitelist.none());
     long timestamp = System.currentTimeMillis();
 
     Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
-    KeyFactory keyFactory = datastore.newKeyFactory().setKind("Task");
-    FullEntity taskEntity =
+    KeyFactory keyFactory = datastore.newKeyFactory().setKind("Location");
+    FullEntity locationEntity =
         Entity.newBuilder(keyFactory.newKey())
-            .set("title", title)
+            .set("name", name)
             .set("timestamp", timestamp)
             .build();
-    datastore.put(taskEntity);
+    datastore.put(locationEntity);
 
     response.sendRedirect("/index.html");
   }
