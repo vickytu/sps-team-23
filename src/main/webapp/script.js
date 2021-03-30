@@ -3,8 +3,8 @@
 function loadLocations() {
   fetch('/stored-locations').then(response => response.json()).then((locations) => {
     const locationListElement = document.getElementById('location-list');
-    locations.forEach((task) => {
-      locationListElement.appendChild(createTaskElement(task));
+    locations.forEach((location) => {
+      locationListElement.appendChild(createLocationElement(location));
     })
   });
 }
@@ -31,7 +31,7 @@ function createLocationElement(location) {
   return locationElement;
 }
 
-/** Tells the server to delete the task. */
+/** Tells the server to delete the location. */
 function deleteLocation(location) {
   const params = new URLSearchParams();
   params.append('id', location.id);
