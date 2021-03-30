@@ -1,6 +1,6 @@
 package com.google.sps.data;
 
-/** An item on a todo list. */
+/** A Location object. */
 public final class Location {
 
   private final long id;

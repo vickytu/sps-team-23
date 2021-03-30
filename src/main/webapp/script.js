@@ -1,7 +1,7 @@
 
-/** Fetches tasks from the server and adds them to the DOM. */
+/** Fetches locations from the server and adds them to the DOM. */
 function loadLocations() {
-  fetch('/stored-locations').then(response => response.json()).then((locations) => {
+  fetch('/list-locations').then(response => response.json()).then((locations) => {
     const locationListElement = document.getElementById('location-list');
     locations.forEach((location) => {
       locationListElement.appendChild(createLocationElement(location));
