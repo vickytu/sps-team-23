@@ -5,6 +5,8 @@ import com.google.cloud.datastore.DatastoreOptions;
 import com.google.cloud.datastore.Entity;
 import com.google.cloud.datastore.FullEntity;
 import com.google.cloud.datastore.KeyFactory;
+import com.google.sps.data.Location;
+
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,15 +23,23 @@ public class NewLocationServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     // Sanitize user input to remove HTML tags and JavaScript.
     String name = Jsoup.clean(request.getParameter("name"), Whitelist.none());
+    String description = Jsoup.clean(request.getParameter("description"), Whitelist.none());
+    String category = Jsoup.clean(request.getParameter("category"), Whitelist.none());
+    String img = Jsoup.clean(request.getParameter("img"), Whitelist.none());
     long timestamp = System.currentTimeMillis();
 
+    //Construct each location entity
     Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
     KeyFactory keyFactory = datastore.newKeyFactory().setKind("Location");
     FullEntity locationEntity =
         Entity.newBuilder(keyFactory.newKey())
             .set("name", name)
+            .set("description", description)
+            .set("category", category)
+            .set("img", img)
             .set("timestamp", timestamp)
             .build();
+    //Save in datastore
     datastore.put(locationEntity);
 
     response.sendRedirect("/index.html");
