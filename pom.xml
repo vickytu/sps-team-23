@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.google.sps</groupId>
-  <artifactId>google-cloud-datastore-todo-list</artifactId>
+  <artifactId>spring21-sps-23</artifactId>
   <version>1</version>
 
   <properties>
@@ -16,7 +16,7 @@
 
     <!-- Project-specific properties -->
     <exec.mainClass>com.google.sps.ServerMain</exec.mainClass>
-    <googleCloudProjectId>YOUR_PROJECT_ID_HERE</googleCloudProjectId>
+    <googleCloudProjectId>spring21-sps-23</googleCloudProjectId>
   </properties>
 
   <dependencies>
@@ -31,12 +31,12 @@
     <dependency>
       <groupId>org.eclipse.jetty</groupId>
       <artifactId>jetty-server</artifactId>
-      <version>${jetty.version}</version>
+      <version>9.4.31.v20200723</version>
     </dependency>
     <dependency>
       <groupId>org.eclipse.jetty</groupId>
       <artifactId>jetty-annotations</artifactId>
-      <version>${jetty.version}</version>
+      <version>9.4.31.v20200723</version>
     </dependency>
 
     <!-- Datastore -->
@@ -112,7 +112,7 @@
         <artifactId>appengine-maven-plugin</artifactId>
         <version>2.2.0</version>
         <configuration>
-          <projectId>${googleCloudProjectId}</projectId>
+          <projectId>spring21-sps-23</projectId>
           <version>1</version>
         </configuration>
       </plugin>
