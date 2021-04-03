@@ -9,6 +9,7 @@ function loadLocations() {
   });
 }
 
+
 /** Creates an element that represents a location, including its delete button. */
 function createLocationElement(location) {
   const locationElement = document.createElement('li');

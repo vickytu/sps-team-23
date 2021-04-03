@@ -19,7 +19,12 @@ import org.jsoup.safety.Whitelist;
 @WebServlet("/new-location")
 public class NewLocationServlet extends HttpServlet {
 
-  @Override
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+
+    @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     // Sanitize user input to remove HTML tags and JavaScript.
     String name = Jsoup.clean(request.getParameter("name"), Whitelist.none());
