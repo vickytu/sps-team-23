@@ -15,8 +15,8 @@ function createLocationElement(location) {
   const locationElement = document.createElement('li');
   locationElement.className = 'location';
 
-  const titleElement = document.createElement('span');
-  titleElement.innerText = location.title;
+  const nameElement = document.createElement('span');
+  nameElement.innerText = location.name;
 
   const deleteButtonElement = document.createElement('button');
   deleteButtonElement.innerText = 'Delete';
@@ -27,8 +27,8 @@ function createLocationElement(location) {
     locationElement.remove();
   });
 
-  locationElement.appendChild(locationElement);
-  lcoationElement.appendChild(deleteButtonElement);
+  locationElement.appendChild(nameElement);
+  locationElement.appendChild(deleteButtonElement);
   return locationElement;
 }
 
