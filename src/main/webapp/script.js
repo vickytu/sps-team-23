@@ -85,6 +85,11 @@ function createLocationElement(location) {
     // Remove the task from the DOM.
     locationElement.remove();
   });
+  const likeButtonElement = document.createElement('button');
+  likeButtonElement.innerText = 'Like';
+  likeButtonElement.addEventListener('click', () => {
+    //code for like button
+  });
 
   locationElement.appendChild(infoElement);
   locationElement.appendChild(deleteButtonElement);
