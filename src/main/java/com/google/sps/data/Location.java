@@ -6,8 +6,8 @@ public final class Location {
   private final long id;
   private final String name;
   private final String description;
-  private final String img;
   private final String category;
+  private final String img;
   private final long timestamp;
   /* Initializing its id, name, descriptions, categories, and time stamps. */
   public Location(long id, String name, String description, String category, String img, long timestamp) {
