@@ -11,29 +11,53 @@ function loadLocations() {
     var landmarksLocations = locations.filter(location => location.category==='landmarks');
 
     const artTag = document.createElement('h2');
-    artTag.innerText = `Art - ${artLocations.length} locations`;
-    locationListElement.appendChild(artTag);
+    if (artLocations.length == 1){
+        artTag.innerText = `Art - 1 location`;
+        locationListElement.appendChild(artTag);
+    }
+    else{
+        artTag.innerText = `Art - ${artLocations.length} locations`;
+        locationListElement.appendChild(artTag);
+    }
     artLocations.forEach((location) => {
       locationListElement.appendChild(createLocationElement(location));
     })
 
     const culturalTag = document.createElement('h2');
-    culturalTag.innerText = `Culture - ${culturalLocations.length} locations`;
-    locationListElement.appendChild(culturalTag);
+    if (culturalLocations.length == 1){
+        culturalTag.innerText = `Culture - 1 location`;
+        locationListElement.appendChild(culturalTag);
+    }
+    else{
+        culturalTag.innerText = `Culture - ${culturalLocations.length} locations`;
+        locationListElement.appendChild(culturalTag);
+    }
     culturalLocations.forEach((location) => {
       locationListElement.appendChild(createLocationElement(location));
     })
 
     const landmarkTag = document.createElement('h2');
-    landmarkTag.innerText = `Landmarks - ${landmarksLocations.length} locations`;
-    locationListElement.appendChild(landmarkTag);
+    if (artLocations.length == 1){
+        landmarkTag.innerText = `Landmarks - 1 location`;
+        locationListElement.appendChild(landmarkTag);
+    }
+    else{
+        landmarkTag.innerText = `Landmarks - ${landmarksLocations.length} locations`;
+        locationListElement.appendChild(landmarkTag);
+    }
     landmarksLocations.forEach((location) => {
       locationListElement.appendChild(createLocationElement(location));
     })
 
     const outdoorTag = document.createElement('h2');
-    outdoorTag.innerText = `The Outdoors - ${outdoorLocations.length} locations`;
-    locationListElement.appendChild(outdoorTag);
+       if (outdoorLocations.length == 1){
+        outdoorTag.innerText = `The Outdoors - 1 location`;
+        locationListElement.appendChild(outdoorTag);
+    }
+    else{
+        outdoorTag.innerText = `The Outdoors - ${outdoorLocations.length} locations`;
+        locationListElement.appendChild(outdoorTag);
+    }
     outdoorLocations.forEach((location) => {
       locationListElement.appendChild(createLocationElement(location));
     })
