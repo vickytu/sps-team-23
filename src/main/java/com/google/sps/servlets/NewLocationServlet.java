@@ -30,6 +30,7 @@ public class NewLocationServlet extends HttpServlet {
     String name = Jsoup.clean(request.getParameter("name"), Whitelist.none());
     String description = Jsoup.clean(request.getParameter("description"), Whitelist.none());
     String category = Jsoup.clean(request.getParameter("category"), Whitelist.none());
+    long num_likes = 0;
     String img = "dixie_mine_trail.jpeg";  //Replace with cloud storage image upload
     //String img = Jsoup.clean(request.getParameter("img"), Whitelist.none());
     long timestamp = System.currentTimeMillis();
@@ -44,6 +45,7 @@ public class NewLocationServlet extends HttpServlet {
             .set("category", category)
             .set("img", img)
             .set("timestamp", timestamp)
+            .set("num_likes", num_likes)
             .build();
     //Save in datastore
     datastore.put(locationEntity);

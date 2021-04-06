@@ -3,6 +3,8 @@ package com.google.sps.servlets;
 import com.google.cloud.datastore.Datastore;
 import com.google.cloud.datastore.DatastoreOptions;
 import com.google.cloud.datastore.Entity;
+import com.google.cloud.datastore.Key;
+import com.google.cloud.datastore.KeyFactory;
 import com.google.cloud.datastore.Query;
 import com.google.cloud.datastore.QueryResults;
 import com.google.cloud.datastore.StructuredQuery.OrderBy;
@@ -28,7 +30,7 @@ public class ListLocationsServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
         Query<Entity> query = 
-            Query.newEntityQueryBuilder().setKind("Location").setOrderBy(OrderBy.desc("category")).build();
+            Query.newEntityQueryBuilder().setKind("Location").setOrderBy(OrderBy.desc("timestamp")).build();
         QueryResults<Entity> results = datastore.run(query);
 
         //Hard-coded location data
@@ -45,15 +47,15 @@ public class ListLocationsServlet extends HttpServlet {
             String category = entity.getString("category");
             String img = entity.getString("img");
             long timestamp = entity.getLong("timestamp");
-            Location location = new Location(id, name, description, category, img, timestamp);
+            long num_likes = entity.getLong("num_likes");
+            Location location = new Location(id, name, description, category, num_likes, img, timestamp);
             locations.add(location);
-
         }
 
-        //Create JSON object for locations
-        Gson gson = new Gson();
+    //Create JSON object for locations
+    Gson gson = new Gson();
 
-        response.setContentType("application/json;");
-        response.getWriter().println(gson.toJson(locations));
-  }
+    response.setContentType("application/json;");
+    response.getWriter().println(gson.toJson(locations));
+    }
 }
