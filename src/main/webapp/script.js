@@ -18,6 +18,12 @@ function createLocationElement(location) {
   const nameElement = document.createElement('span');
   nameElement.innerText = location.name;
 
+  const descriptionElement = document.createElement('span');
+  descriptionElement.innerText = location.description;
+
+  const categoryElement = document.createElement('span');
+  categoryElement.innerText = location.category;
+
   const deleteButtonElement = document.createElement('button');
   deleteButtonElement.innerText = 'Delete';
   deleteButtonElement.addEventListener('click', () => {
@@ -28,6 +34,8 @@ function createLocationElement(location) {
   });
 
   locationElement.appendChild(nameElement);
+  locationElement.appendChild(descriptionElement);
+  locationElement.appendChild(categoryElement);
   locationElement.appendChild(deleteButtonElement);
   return locationElement;
 }
