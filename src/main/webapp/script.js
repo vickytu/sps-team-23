@@ -97,7 +97,7 @@ function createLocationElement(location) {
 
         infoElement.innerText = `${location.name}
 
-        Located in ${location.state}
+        Located in ${location.city},${location.state}
 
         ${location.description}
   
