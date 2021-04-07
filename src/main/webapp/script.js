@@ -74,8 +74,6 @@ function createLocationElement(location) {
   const infoElement = document.createElement('span');
   infoElement.innerText = `${location.name}
 
-  Located in ${location.city},${location.state}
-
   ${location.description}
   
   Likes: ${location.num_likes}`;
@@ -96,8 +94,6 @@ function createLocationElement(location) {
         location.num_likes++;
 
         infoElement.innerText = `${location.name}
-
-        Located in ${location.city},${location.state}
 
         ${location.description}
   
