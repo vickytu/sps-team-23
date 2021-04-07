@@ -73,10 +73,13 @@ function createLocationElement(location) {
 
   const infoElement = document.createElement('span');
   infoElement.innerText = `${location.name}
-  
+
+  Located in ${location.city},${location.state}
+
   ${location.description}
   
   Likes: ${location.num_likes}`;
+
   const deleteButtonElement = document.createElement('button');
   deleteButtonElement.innerText = 'Delete';
   deleteButtonElement.addEventListener('click', () => {
@@ -86,12 +89,16 @@ function createLocationElement(location) {
     locationElement.remove();
   });
 
+  //code for like button
   const likeButtonElement = document.createElement('button');
   likeButtonElement.innerText = 'Like';
   likeButtonElement.addEventListener('click', () => {
         location.num_likes++;
+
         infoElement.innerText = `${location.name}
-  
+
+        Located in ${location.state}
+
         ${location.description}
   
         Likes: ${location.num_likes}`;

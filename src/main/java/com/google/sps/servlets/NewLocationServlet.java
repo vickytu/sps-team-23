@@ -28,6 +28,8 @@ public class NewLocationServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     // Sanitize user input to remove HTML tags and JavaScript.
     String name = Jsoup.clean(request.getParameter("name"), Whitelist.none());
+    String city = Jsoup.clean(request.getParameter("city"), Whitelist.none());
+    String state = Jsoup.clean(request.getParameter("state"), Whitelist.none());
     String description = Jsoup.clean(request.getParameter("description"), Whitelist.none());
     String category = Jsoup.clean(request.getParameter("category"), Whitelist.none());
     long num_likes = 0;
@@ -41,6 +43,8 @@ public class NewLocationServlet extends HttpServlet {
     FullEntity locationEntity =
         Entity.newBuilder(keyFactory.newKey())
             .set("name", name)
+            .set("city", city)
+            .set("state", state)
             .set("description", description)
             .set("category", category)
             .set("img", img)
