@@ -42,12 +42,14 @@ public class ListLocationsServlet extends HttpServlet {
 
             long id = entity.getKey().getId();
             String name = entity.getString("name");
+            String city = entity.getString("city");
+            String state = entity.getString("state");
             String description = entity.getString("description");
             String category = entity.getString("category");
             String img = entity.getString("img");
             long timestamp = entity.getLong("timestamp");
             long num_likes = entity.getLong("num_likes");
-            Location location = new Location(id, name, description, category, num_likes, img, timestamp);
+            Location location = new Location(id, name, city, state, description, category, num_likes, img, timestamp);
             locations.add(location);
         }
 
