@@ -31,7 +31,13 @@ public class ServerMain {
                 new AnnotationConfiguration(), new WebInfConfiguration(),
         });
 
-            // Handle static resources, e.g. html files.
+        // Look for annotations in the classes directory (dev server) and in the jar file (live server)
+        webAppContext.setAttribute(
+            "org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern",
+            ".*/target/classes/|.*\\.jar");
+
+
+        // Handle static resources, e.g. html files.
         webAppContext.addServlet(DefaultServlet.class, "/");
 
         // Start the server! 🚀

@@ -19,13 +19,22 @@ import org.jsoup.safety.Whitelist;
 @WebServlet("/new-location")
 public class NewLocationServlet extends HttpServlet {
 
-  @Override
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+
+    @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     // Sanitize user input to remove HTML tags and JavaScript.
     String name = Jsoup.clean(request.getParameter("name"), Whitelist.none());
+    String city = Jsoup.clean(request.getParameter("city"), Whitelist.none());
+    String state = Jsoup.clean(request.getParameter("state"), Whitelist.none());
     String description = Jsoup.clean(request.getParameter("description"), Whitelist.none());
     String category = Jsoup.clean(request.getParameter("category"), Whitelist.none());
-    String img = Jsoup.clean(request.getParameter("img"), Whitelist.none());
+    long num_likes = 0;
+    String img = "dixie_mine_trail.jpeg";  //Replace with cloud storage image upload
+    //String img = Jsoup.clean(request.getParameter("img"), Whitelist.none());
     long timestamp = System.currentTimeMillis();
 
     //Construct each location entity
@@ -34,10 +43,13 @@ public class NewLocationServlet extends HttpServlet {
     FullEntity locationEntity =
         Entity.newBuilder(keyFactory.newKey())
             .set("name", name)
+            .set("city", city)
+            .set("state", state)
             .set("description", description)
             .set("category", category)
             .set("img", img)
             .set("timestamp", timestamp)
+            .set("num_likes", num_likes)
             .build();
     //Save in datastore
     datastore.put(locationEntity);
