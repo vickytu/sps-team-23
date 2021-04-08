@@ -19,6 +19,46 @@
             <p>Some text..</p>
         </div>
     </div>
+=======
+    <h1>List of Hidden Gems:</h1>
+    <ul id="location-list"></ul>
+    <p></p>
+
+    <form method="POST" action="/new-location">
+        <h2>Know of any hidden gems? Add them here!</h2>
+        
+        <p> Enter the location name: </p>
+        <input type="text" name="name"/>
+        <br/>
+
+        <p> Enter city: </p>
+        <input type="text" name="city"/>
+        <br/>
+
+        <p> Enter state abbreviation (for example, NY): </p>
+        <input type="text" name="state"/>
+        <br/>
+
+        <p> Add a description: </p>
+        <input type="text" name="description"/>
+        <br/>
+        <br/>
+    
+        <label for="category">Choose a category:</label>
+        <br/>
+        <select name="category">
+            <option value="outdoor">Outdoor</option>
+            <option value="art">Art</option>
+            <option value="cultural">Cultural</option>
+            <option value="landmarks">Landmarks</option>
+        </select>
+
+
+        <br/>
+        <br/>
+        <input type="submit">
+        
+    </form>
 
   </body>
 </html>
