@@ -1,5 +1,5 @@
-/home/rshillingford/software-product-sprint/sps-team-23/src/main/java/com/google/sps/servlets/DeleteLocationsServlet.java
-/home/rshillingford/software-product-sprint/sps-team-23/src/main/java/com/google/sps/ServerMain.java
-/home/rshillingford/software-product-sprint/sps-team-23/src/main/java/com/google/sps/servlets/NewLocationServlet.java
-/home/rshillingford/software-product-sprint/sps-team-23/src/main/java/com/google/sps/servlets/StoredLocationsServlet.java
-/home/rshillingford/software-product-sprint/sps-team-23/src/main/java/com/google/sps/servlets/ListLocationsServlet.java
+/home/aramirez/sps-team-23/src/main/java/com/google/sps/servlets/ListLocationsServlet.java
+/home/aramirez/sps-team-23/src/main/java/com/google/sps/ServerMain.java
+/home/aramirez/sps-team-23/src/main/java/com/google/sps/servlets/DeleteLocationServlet.java
+/home/aramirez/sps-team-23/src/main/java/com/google/sps/servlets/NewLocationServlet.java
+/home/aramirez/sps-team-23/src/main/java/com/google/sps/data/Location.java
