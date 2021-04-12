@@ -71,6 +71,8 @@ function createLocationElement(location) {
   const locationElement = document.createElement('li');
   locationElement.className = 'location';
 
+  const url = location.name + "</br> <img src=\"" + location.img + "\">" + "</br> <p> Located in " + location.city + location.state + "</br>" + location.description + "</br>" + "<p>Likes: " + location.num_likes+ "</p> </br>";
+
   const infoElement = document.createElement('span');
   infoElement.innerText = `${location.name}
 
@@ -79,6 +81,8 @@ function createLocationElement(location) {
   ${location.description}
   
   Likes: ${location.num_likes}`;
+
+  infoElement.innerHTML = url;
 
   const deleteButtonElement = document.createElement('button');
   deleteButtonElement.innerText = 'Delete';
@@ -89,12 +93,16 @@ function createLocationElement(location) {
     locationElement.remove();
   });
 
+
   //code for like button
   const likeButtonElement = document.createElement('button');
   likeButtonElement.innerText = 'Like';
   likeButtonElement.addEventListener('click', () => {
+        
         location.num_likes++;
 
+        //url = location.name + "</br> <img src=\"" + location.img + "\">" + "</br> <p> Located in " + location.city + location.state + "</br>" + location.description + "</br>" + "<p>Likes: " + location.num_likes+1 + "</p> </br>";
+        
         infoElement.innerText = `${location.name}
 
         Located in ${location.city}, ${location.state}
@@ -102,6 +110,9 @@ function createLocationElement(location) {
         ${location.description}
   
         Likes: ${location.num_likes}`;
+
+
+        //infoElement.innerHTML = url;
   });
 
   locationElement.appendChild(infoElement);
