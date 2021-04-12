@@ -42,8 +42,6 @@ public class FormHandlerServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-    // Get the message entered by the user.
-    String message = request.getParameter("message");
 
     // Get the file chosen by the user.
     Part filePart = request.getPart("image");
@@ -52,16 +50,19 @@ public class FormHandlerServlet extends HttpServlet {
 
     // Upload the file and get its URL
     String uploadedFileUrl = uploadToCloudStorage(fileName, fileInputStream);
+    
+    response.sendRedirect("/index.html");
 
     // Output some HTML that shows the data the user entered.
     // You could also store the uploadedFileUrl in Datastore instead.
+    /*
     PrintWriter out = response.getWriter();
     out.println("<p>Here's the image you uploaded:</p>");
     out.println("<a href=\"" + uploadedFileUrl + "\">");
     out.println("<img src=\"" + uploadedFileUrl + "\" />");
     out.println("</a>");
-    out.println("<p>Here's the text you entered:</p>");
-    out.println(message);
+    */
+
   }
 
   /** Uploads a file to Cloud Storage and returns the uploaded file's URL. */
