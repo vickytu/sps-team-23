@@ -15,6 +15,17 @@ import javax.servlet.http.HttpServletResponse;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
 
+import com.google.cloud.storage.Blob;
+import com.google.cloud.storage.BlobId;
+import com.google.cloud.storage.BlobInfo;
+import com.google.cloud.storage.Storage;
+import com.google.cloud.storage.StorageOptions;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.http.Part;
+
 /** Servlet responsible for creating new locations. */
 @WebServlet("/new-location")
 public class NewLocationServlet extends HttpServlet {
@@ -25,35 +36,51 @@ public class NewLocationServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
-  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    // Sanitize user input to remove HTML tags and JavaScript.
-    String name = Jsoup.clean(request.getParameter("name"), Whitelist.none());
-    String city = Jsoup.clean(request.getParameter("city"), Whitelist.none());
-    String state = Jsoup.clean(request.getParameter("state"), Whitelist.none());
-    String description = Jsoup.clean(request.getParameter("description"), Whitelist.none());
-    String category = Jsoup.clean(request.getParameter("category"), Whitelist.none());
-    long num_likes = 0;
-    String img = "dixie_mine_trail.jpeg";  //Replace with cloud storage image upload
-    //String img = Jsoup.clean(request.getParameter("img"), Whitelist.none());
-    long timestamp = System.currentTimeMillis();
+  public void doPost(final HttpServletRequest request, final HttpServletResponse response) throws IOException, ServletException {
+        // Sanitize user input to remove HTML tags and JavaScript.
+        final String name = Jsoup.clean(request.getParameter("name"), Whitelist.none());
+        final String city = Jsoup.clean(request.getParameter("city"), Whitelist.none());
+        final String state = Jsoup.clean(request.getParameter("state"), Whitelist.none());
+        final String description = Jsoup.clean(request.getParameter("description"), Whitelist.none());
+        final String category = Jsoup.clean(request.getParameter("category"), Whitelist.none());
+        final long num_likes = 0;
+        String img = "dixie_mine_trail.jpeg"; // Replace with cloud storage image upload
+        // String img = Jsoup.clean(request.getParameter("img"), Whitelist.none());
+        final long timestamp = System.currentTimeMillis();
 
-    //Construct each location entity
-    Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
-    KeyFactory keyFactory = datastore.newKeyFactory().setKind("Location");
-    FullEntity locationEntity =
-        Entity.newBuilder(keyFactory.newKey())
-            .set("name", name)
-            .set("city", city)
-            .set("state", state)
-            .set("description", description)
-            .set("category", category)
-            .set("img", img)
-            .set("timestamp", timestamp)
-            .set("num_likes", num_likes)
-            .build();
-    //Save in datastore
-    datastore.put(locationEntity);
+        // Get the file chosen by the user.
+        final Part filePart = request.getPart("img");
+        final String fileName = filePart.getSubmittedFileName();
+        final InputStream fileInputStream = filePart.getInputStream();
 
-    response.sendRedirect("/index.html");
+        // Upload the file and get its URL
+        final String uploadedFileUrl = uploadToCloudStorage(fileName, fileInputStream);
+        img = uploadedFileUrl;
+
+        // Construct each location entity
+        final Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
+        final KeyFactory keyFactory = datastore.newKeyFactory().setKind("Location");
+        final FullEntity locationEntity = Entity.newBuilder(keyFactory.newKey()).set("name", name).set("city", city)
+                .set("state", state).set("description", description).set("category", category).set("img", img)
+                .set("timestamp", timestamp).set("num_likes", num_likes).build();
+        // Save in datastore
+        datastore.put(locationEntity);
+
+        response.sendRedirect("/index.html");
+    }
+
+    /** Uploads a file to Cloud Storage and returns the uploaded file's URL. */
+    private static String uploadToCloudStorage(final String fileName, final InputStream fileInputStream) {
+        final String projectId = "aramirez-sps-spring21";
+        final String bucketName = "aramirez-sps-spring21.appspot.com";
+        final Storage storage = StorageOptions.newBuilder().setProjectId(projectId).build().getService();
+        final BlobId blobId = BlobId.of(bucketName, fileName);
+        final BlobInfo blobInfo = BlobInfo.newBuilder(blobId).build();
+
+        // Upload the file to Cloud Storage.
+        final Blob blob = storage.create(blobInfo, fileInputStream);
+
+    // Return the uploaded file's URL.
+    return blob.getMediaLink();
   }
 }
